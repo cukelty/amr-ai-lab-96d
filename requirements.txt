@@ -1,0 +1,40 @@
+# ============================================================
+# amr-ai-lab 依赖清单
+# ------------------------------------------------------------
+# 两档：档位 1 = 大多数学习日（Day 01-24 主力）；档位 2 = 阶段 2 序列语言模型才需要
+# ⏰ 所有版本号是本文交付时点的快照，半年后重装前请复核一遍（模型/数据库同理）
+#
+# 【用法】
+#   方式 A（推荐，新手）：只装档位 1 —— 直接复制下面"档位 1"里那行安装命令即可
+#   方式 B（一把梭）：pip install -r requirements.txt
+#           ⚠️ 这会把 torch 也装上（约 1GB、10-20 分钟），不适合"今天就想跑通 Day 01"的人
+#   记录实际版本：pip freeze > requirements.txt    （覆盖前先备份，会把整棵依赖树都写进去）
+# ============================================================
+
+
+# ---------- 档位 1：bio_ai（约 150MB，10-20 分钟）----------
+# 安装命令（国内走清华镜像，可换成你自己的源），整行复制：
+#   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy==1.26.4 pandas==2.2.2 matplotlib==3.8.4 jupyterlab==4.2.4 ipykernel==6.29.4 scikit-learn==1.5.0 scipy==1.13.1 biopython==1.83 requests==2.32.5
+
+numpy==1.26.4            # ⚠️ 必须 < 2！torch 2.2.2 是按 numpy 1.x ABI 编译的，
+                         #    numpy 2.x 会让 torch 报 "numpy.dtype size changed" / 二进制不兼容（实测踩过的坑）
+pandas==2.2.2            # 表格处理：Day 01 起每天都要用
+matplotlib==3.8.4        # 画图：所有 outputs/*.png 都出自这里
+jupyterlab==4.2.4        # 交互式笔记本：边写边看，适配"边读文章边改代码"的学习节奏
+ipykernel==6.29.4        # Jupyter 的 Python 内核，配合 jupyterlab 一起装
+scikit-learn==1.5.0      # 经典机器学习：Day 14 逻辑回归起用；随机森林 day20、ROC/AUC day18
+scipy==1.13.1            # sklearn 的搭档：不锁的话 pip 会拉到 scipy 1.17+，与 sklearn 1.5.0 时代未联调过
+biopython==1.83          # 序列处理：翻译、读 FASTA（Day 20+ 用）
+requests==2.32.5         # 调 API：参考文献核验器（Crossref）用
+                         # ⚠️ 原锁 2.32.0 已被 PyPI 撤回（yanked），pip 会告警；2026-10-13 审查改为 2.32.5
+
+
+# ---------- 档位 2：bio_torch（约 500MB-1GB，10-20 分钟；阶段 2 才需要）----------
+# ⚠️ 不要直接 pip install -r 装 torch：默认源在 Linux 上会给 CUDA 版（2GB+，你用不上）
+#    正确命令（任何系统都这样装 CPU 版）：
+#      pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+#      pip install -i https://pypi.tuna.tsinghua.edu.cn/simple transformers==4.40.2 tokenizers==0.19.1
+
+torch==2.2.2             # 深度学习框架：只装 CPU 版，本项目的示例都不需要 GPU
+transformers==4.40.2     # Hugging Face 模型库：加载 ESM-2 用（⏰ 用时再查 ESM-2 最新版本）
+tokenizers==0.19.1       # transformers 4.40.x 要求 >=0.19,<0.20；别让 pip 自动升到 0.20 以上

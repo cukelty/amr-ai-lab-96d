@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 环境
+.env
+.conda/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 大文件： Levinstein 模型权重不要进仓库
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.h5
+*.pkl
+*.tar.gz
+
+# 输出图片是否跟踪：默认忽略，愿 COMMIT 的在 README 里有说明
+# outputs/*.png
+
+# 文章正文与发布产物：不入公开仓库（本地保存）
+articles/
+publish/
+
+# 日志
+*.log
