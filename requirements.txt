@@ -22,7 +22,7 @@ pandas==2.2.2            # 表格处理：Day 01 起每天都要用
 matplotlib==3.8.4        # 画图：所有 outputs/*.png 都出自这里
 jupyterlab==4.2.4        # 交互式笔记本：边写边看，适配"边读文章边改代码"的学习节奏
 ipykernel==6.29.4        # Jupyter 的 Python 内核，配合 jupyterlab 一起装
-scikit-learn==1.5.0      # 经典机器学习：Day 14 逻辑回归起用；随机森林 day20、ROC/AUC day18
+scikit-learn==1.5.0      # 经典机器学习：day08 KMeans 聚类首次登场（实测版本）；Day 14 逻辑回归起继续用；随机森林 day20、ROC/AUC day18
 scipy==1.13.1            # sklearn 的搭档：不锁的话 pip 会拉到 scipy 1.17+，与 sklearn 1.5.0 时代未联调过
 biopython==1.83          # 序列处理：翻译、读 FASTA（Day 20+ 用）
 requests==2.32.5         # 调 API：参考文献核验器（Crossref）用
